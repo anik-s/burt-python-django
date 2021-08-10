@@ -1,0 +1,246 @@
+{% extends 'frontend/base/home_base.html' %}
+{% load custom_tags %}
+{% block content %}
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class=" container-fluid ">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-custom card-stretch gutter-b" data-card="true" id="kt_card_3">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">{{ platform.name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-custom card-stretch gutter-b" data-card="true" id="kt_card_3">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">Overview</h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <a href="#" class="btn btn-icon btn-circle btn-sm btn-light-primary mr-1"
+                                   data-card-tool="toggle">
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    {% if platform.profile_image %}
+                                        <img src="{{ platform.profile_image.url }}" width="100px"
+                                             height="100px"
+                                             alt="">
+                                    {% else %}
+                                        <img src="" alt="-">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-11">
+                                    <a class="b-title">{{ platform.name }}</a>
+                                    <p>{{ platform.description }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            {% if platform.owned_by_organization is not None %}
+                                <div class="row">
+                                    <div class="col-md-2">Owned By</div>
+                                    <div class="col-md-10">
+                                        <a href="/organizations/{{ platform.owned_by_organization.id }}">{{ platform.owned_by_organization.name }}</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.platform_business_model_type is not None %}
+                                <div class="row">
+                                    <div class="col-md-2">Type</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.platform_business_model_type.name }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.platform_business_model_type is not None %}
+                                <div class="row">
+                                    <div class="col-md-2">Categories</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.platformcategory_set.all | formatted_sub_categories }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if founded_date != '' %}
+                                <div class="row">
+                                    <div class="col-md-2">Founded Date</div>
+                                    <div class="col-md-10">
+                                        <p>{{ founded_date }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if closed_date != '' %}
+                                <div class="row">
+                                    <div class="col-md-2">Closed Date</div>
+                                    <div class="col-md-10">
+                                        <p>{{ closed_date }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-2">Operating Status</div>
+                                <div class="col-md-10">
+                                    {% if closed_date != '' %}
+                                        <p>Inactive</p>
+                                    {% else %}
+                                        <p>Active</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            {% if platform.producers != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Producers</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.producers }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.consumers != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Consumers</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.consumers }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.partners != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Partners</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.partners }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.transactions != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Transactions</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.transactions }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.value != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Value</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.value }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.network_effects != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Network Effects</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.network_effects }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.markets != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Markets</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.markets }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <hr>
+                            <br>
+                            {% if platform.website != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Website</div>
+                                    <div class="col-md-10">
+                                        <p><a href="{{ platform.website }}"
+                                              target="_blank">{{ platform.website }}</a></p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.facebook != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Facebook</div>
+                                    <div class="col-md-10">
+                                        <p><a href="{{ platform.facebook }}"
+                                              target="_blank">{{ platform.facebook }}</a></p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.linkedin != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Linkedin</div>
+                                    <div class="col-md-10">
+                                        <p><a href="{{ platform.linkedin }}"
+                                              target="_blank">{{ platform.linkedin }}</a></p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.twitter != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Twitter</div>
+                                    <div class="col-md-10">
+                                        <p><a href="{{ platform.twitter }}"
+                                              target="_blank">{{ platform.twitter }}</a></p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.contact_email != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Contact Email</div>
+                                    <div class="col-md-10">
+                                        <p>
+                                            <a href="mailto:{{ platform.contact_email }}">{{ platform.contact_email }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if platform.phone_number != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Phone Number</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.phone_number }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if platform.full_description != "" %}
+                                <div class="row">
+                                    <div class="col-md-2">Full Description</div>
+                                    <div class="col-md-10">
+                                        <p>{{ platform.full_description }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end::Row-->
+
+
+            <!--end::Dashboard-->
+
+            <!--[html-partial:end:{"id":"demo1/dist/inc/view/partials/content/dashboards/demo1","page":"index"}]/-->
+
+            <!--[html-partial:end:{"id":"demo1/dist/inc/view/demos/pages/index","page":"index"}]/-->
+        </div>
+
+        <!--end::Container-->
+    </div>
+
+    <!--end::Entry-->
+
+{% endblock %}

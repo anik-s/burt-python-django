@@ -1,0 +1,403 @@
+{% extends 'frontend/frontend_base.html' %}
+{% load custom_tags %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="kt-portlet kt-portlet--last kt-portlet--head-lg kt-portlet--responsive-mobile"
+                 id="kt_page_portlet">
+                <div class="kt-portlet__head kt-portlet__head--lg">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">{{ event.name }}
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-overview">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-overview"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Overview
+                                        </div>
+                                    </div>
+                                    <div id="collapse-overview" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-overview">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    {% if event.profile_image %}
+                                                        <img src="{{ event.profile_image.url }}" width="100px"
+                                                             height="100px"
+                                                             alt="">
+                                                    {% else %}
+                                                        <img src="" alt="-">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <p>{{ event.name }}</p>
+                                                    <p>{{ event.description }}</p>
+                                                    {% if event.venue_city != None %}
+                                                        {{ event.venue_city.name }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            {% if event.event_type != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Event Type</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.event_type.name }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.event_category != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Event Category</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.event_category.name }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.event_sub_category != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Event Sub-Category</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.event_sub_category.name }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.venue_country != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Region</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.venue_country.name }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if start_date != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Start Date</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ start_date }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if end_date != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">End Date</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ end_date }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if end_date != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">End Date</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ end_date }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.venue_address != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Venue Name</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.venue_address }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.event_url != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Event URL</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ event.event_url }}"
+                                                              target="_blank">{{ event.event_url }}</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.registration_url != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Registration URL</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ event.registration_url }}" target="_blank">Click
+                                                            here to register</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if event.full_description != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Event Description</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ event.full_description }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-speakers">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-speakers"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Speakers
+                                        </div>
+                                    </div>
+                                    <div id="collapse-speakers" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-speakers">
+                                        <div class="card-body">
+                                            <span>Number of Speakers: {{ event_speakers|length }}</span>
+                                            <br>
+                                            <br>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Speaker</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for p_speaker in event_speakers %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/persons/{{ p_speaker.person.id }}">
+                                                                {{ p_speaker.person.first_name }} {{ p_speaker.person.last_name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ p_speaker.person.biography }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for o_speaker in event_org_speakers %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/organizations/{{ o_speaker.organization.id }}">
+                                                                {{ o_speaker.organization.name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ o_speaker.organization.description }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-exhibitors">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-exhibitors"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Exhibitors
+                                        </div>
+                                    </div>
+                                    <div id="collapse-exhibitors" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-exhibitors">
+                                        <div class="card-body">
+                                            <span>Number of Exhibitors: {{ event_exhibitors|length }}</span>
+                                            <br>
+                                            <br>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Exhibitor</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for p_exhibitor in event_exhibitors %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/persons/{{ p_exhibitor.person.id }}">
+                                                                {{ p_exhibitor.person.first_name }} {{ p_exhibitor.person.last_name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ p_exhibitor.person.biography }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for o_exhibitor in event_org_exhibitors %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/organizations/{{ o_exhibitor.organization.id }}">
+                                                                {{ o_exhibitor.organization.name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ o_exhibitor.organization.description }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-organizers">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-organizers"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Organizers
+                                        </div>
+                                    </div>
+                                    <div id="collapse-organizers" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-organizers">
+                                        <div class="card-body">
+                                            <span>Number of Organizers: {{ event_organizers|length }}</span>
+                                            <br>
+                                            <br>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Organizer</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for p_organizer in event_organizers %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/persons/{{ p_organizer.person.id }}">
+                                                                {{ p_organizer.person.first_name }} {{ p_organizer.person.last_name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ p_organizer.person.biography }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for o_organizer in event_org_organizers %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/organizations/{{ o_organizer.organization.id }}">
+                                                                {{ o_organizer.organization.name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ o_organizer.organization.description }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-sponsors">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-sponsors"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Sponsors
+                                        </div>
+                                    </div>
+                                    <div id="collapse-sponsors" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-sponsors">
+                                        <div class="card-body">
+                                            <span>Number of Sponsors: {{ event_sponsors|length }}</span>
+                                            <br>
+                                            <br>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sponsor</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for p_sponsor in event_sponsors %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/persons/{{ p_sponsor.person.id }}">
+                                                                {{ p_sponsor.person.first_name }} {{ p_sponsor.person.last_name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ p_sponsor.person.biography }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for o_sponsor in event_org_sponsors %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/organizations/{{ o_sponsor.organization.id }}">
+                                                                {{ o_sponsor.organization.name }}
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ o_sponsor.organization.description }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-news">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-news"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Recent News
+                                        </div>
+                                    </div>
+                                    <div id="collapse-news" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-news">
+                                        <div class="card-body">
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Activity</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for e_news in event.eventnews_set.all %}
+                                                    <tr>
+                                                        <td>{{ e_news.news.date_day }} {{ e_news.news.date_month }} {{ e_news.news.date_year }}</td>
+                                                        <td><a href="{{ e_news.news.url }}"
+                                                               target="_blank">{{ e_news.news.title }}</a></td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

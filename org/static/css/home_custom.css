@@ -1,0 +1,39 @@
+.main-feat-news-title {
+    font-size: 26px !important;
+}
+
+.main-feat-news-source {
+    font-size: 13px !important;
+}
+
+.feat-news-title {
+    font-size: 18px !important;
+}
+
+.feat-news-source {
+    font-size: 13px !important;
+}
+
+.latest-news-title {
+    font-size: 22px !important;
+}
+
+.latest-news-source {
+    font-size: 13px !important;
+}
+
+.latest-news-heading {
+    font-size: 18px !important;
+}
+
+.upcoming-event-title {
+    font-size: 22px !important;
+}
+
+.upcoming-event-place {
+    font-size: 13px !important;
+}
+
+.focus {
+    font-weight: bold !important;
+}

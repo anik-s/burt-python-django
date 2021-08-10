@@ -1,0 +1,49 @@
+{% extends 'frontend/home/home_base.html' %}
+{% block content %}
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class=" container-fluid ">
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-custom gutter-b example example-compact">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Login
+                            </h3>
+                            <div class="card-toolbar">
+
+                            </div>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    {{ form.username.label_tag }}
+                                    {{ form.username }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.password.label_tag }}
+                                    {{ form.password }}
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="Login">
+                                </div>
+                                <input type="hidden" name="next" value="/organizations">
+                                {% if form.errors %}
+                                    <div class="form-group">
+                                        <label>Your username and password didn't match. Please try again.</label>
+                                    </div>
+                                {% endif %}
+                                <div class="form-group"><p>Not registered? <a href="">Create an account</a></p>
+                                    <a href="">Forgot Password?</a></div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Entry-->
+            </div>
+        </div>
+{% endblock %}

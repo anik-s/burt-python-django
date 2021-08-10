@@ -1,0 +1,361 @@
+{% extends 'frontend/frontend_base.html' %}
+{% load custom_tags %}
+{% load mathfilters %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="kt-portlet kt-portlet--last kt-portlet--head-lg kt-portlet--responsive-mobile"
+                 id="kt_page_portlet">
+                <div class="kt-portlet__head kt-portlet__head--lg">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">{{ organization.name }}
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-overview">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-overview"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Overview
+                                        </div>
+                                    </div>
+                                    <div id="collapse-overview" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-overview">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    {% if organization.profile_image %}
+                                                        <img src="{{ organization.profile_image.url }}" width="100px"
+                                                             height="100px"
+                                                             alt="">
+                                                    {% else %}
+                                                        <img src="" alt="-">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <p>{{ organization.name }}</p>
+                                                    <p>{{ organization.description }}</p>
+                                                    {% if organization.city != None %}
+                                                        <p>{{ organization.city.name }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            {% if organization.organizationhascategory_set.all %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Categories</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ organization.organizationhascategory_set.all | formatted_sub_categories }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if founded_date != '' %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Founded Date</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ founded_date }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if closed_date != '' %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Closed Date</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ closed_date }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="col-md-2">Operating Status</div>
+                                                <div class="col-md-10">
+                                                    {% if closed_date != '' %}
+                                                        <p>Inactive</p>
+                                                    {% else %}
+                                                        <p>Active</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            {% if organization.number_of_employees != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Number of Employees</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ organization.number_of_employees }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            <hr>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-2">IPO Status</div>
+                                                <div class="col-md-10">
+                                                    {% if ipo_date != '' %}
+                                                        <p>Public</p>
+                                                    {% else %}
+                                                        <p>-</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            {% if organization.stock_symbol != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Stock Symbol</div>
+                                                    <div class="col-md-10"><p>{{ organization.stock_symbol }}</p></div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.company_type != None %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Company Type</div>
+                                                    <div class="col-md-10"><p>{{ organization.company_type.name }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.organization_type == "Investment Firm" %}
+                                                <hr>
+                                                <br>
+                                                {% if organization.investor_type != None %}
+                                                    <div class="row">
+                                                        <div class="col-md-2">Investor Type</div>
+                                                        <div class="col-md-10">
+                                                            <p>{{ organization.investor_type.name }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% if organization.investment_stage != None %}
+                                                    <div class="row">
+                                                        <div class="col-md-2">Investor Stage</div>
+                                                        <div class="col-md-10">
+                                                            <p>{{ organization.investment_stage.name }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Number of Exits</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ exits_count }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+                                            <hr>
+                                            <br>
+                                            {% if organization.website != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Website</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ organization.website }}"
+                                                              target="_blank">{{ organization.website }}</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.facebook != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Facebook</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ organization.facebook }}"
+                                                              target="_blank">{{ organization.facebook }}</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.linkedin != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Linkedin</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ organization.linkedin }}"
+                                                              target="_blank">{{ organization.linkedin }}</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.twitter != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Twitter</div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="{{ organization.twitter }}"
+                                                              target="_blank">{{ organization.twitter }}</a></p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.contact_email != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Contact Email</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ organization.contact_email }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.phone_number != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Phone Number</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ organization.phone_number }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if organization.full_description != "" %}
+                                                <div class="row">
+                                                    <div class="col-md-2">Description</div>
+                                                    <div class="col-md-10">
+                                                        <p>{{ organization.full_description }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if organization.platform_set.all %}
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-platforms">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-platforms"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Platforms
+                                        </div>
+                                    </div>
+                                    <div id="collapse-platforms" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-platforms">
+                                        <div class="card-body">
+                                            <span>Number of Platforms: {{ organization.platform_set.all|length }}</span>
+                                            <br>
+                                            <br>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Platform</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for platform in organization.platform_set.all %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/platforms/{{ platform.id }}">{{ platform.name }}</a>
+                                                        </td>
+                                                        <td>{{ platform.description }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if organization.acquiring_organization.all or organization.acquired_organization.all %}
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-platforms">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-platforms"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Acquisition Details
+                                        </div>
+                                    </div>
+                                    <div id="collapse-platforms" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-platforms">
+                                        <div class="card-body">
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Transaction Name</th>
+                                                    <th>Acquired By</th>
+                                                    <th>Announced Date</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for acquisition in organization.acquiring_organization.all %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/platforms/{{ acquisition.id }}">{{ acquisition.transaction_name }}</a>
+                                                        </td>
+                                                        <td>{{ acquisition.acquiring_organization.name }}</td>
+                                                        <td>{{ acquisition.announced_date_day }} {{ acquisition.announced_date_month }} {{ acquisition.announced_date_year }}</td>
+                                                        <td>{{ acquisition.currency }} {{ acquisition.price }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for acquisition in organization.acquired_organization.all %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="/platforms/{{ acquisition.id }}">{{ acquisition.transaction_name }}</a>
+                                                        </td>
+                                                        <td>{{ acquisition.acquiring_organization.name }}</td>
+                                                        <td>{{ acquisition.announced_date_day }} {{ acquisition.announced_date_month }} {{ acquisition.announced_date_year }}</td>
+                                                        <td>{{ acquisition.currency }} {{ acquisition.price }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if organization.fundinground_set.all %}
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordion-platforms">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <div class="card-title" data-toggle="collapse" data-target="#collapse-platforms"
+                                             aria-expanded="false" aria-controls="collapseOne1">
+                                            Acquisition Details
+                                        </div>
+                                    </div>
+                                    <div id="collapse-platforms" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordion-platforms">
+                                        <div class="card-body">
+                                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                                   id="person-datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Announced Date</th>
+                                                    <th>Transaction Name</th>
+                                                    <th>No. Of Investors</th>
+                                                    <th>Money Raised</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for fr in organization.fundinground_set.all %}
+                                                    <tr>
+                                                        <td>{{ fr.announced_date_day }} {{ fr.announced_date_month }} {{ fr.announced_date_year }}</td>
+                                                        <td>
+                                                            <a href="/funding_rounds/{{ fr.id }}">{{ fr.transaction_name }}</a>
+                                                        </td>
+                                                        <td>{{ fr.fundingroundinvestor_set.all|length|addition:fr.fundingroundinvestor_set.all|length }}</td>
+                                                        <td>{{ fr.money_raised_currency|default_if_none:"" }} {{ fr.money_raised|default_if_none:"-" }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

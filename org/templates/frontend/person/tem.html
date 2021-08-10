@@ -1,0 +1,56 @@
+{% extends 'frontend/base/home_base.html' %}
+{% block content %}
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class=" container-fluid ">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-custom card-stretch gutter-b" data-card="true" id="kt_card_3">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">{{ person.first_name }} {{ person.last_name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-custom card-stretch gutter-b" data-card="true" id="kt_card_3">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">Overview</h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <a href="#" class="btn btn-icon btn-circle btn-sm btn-light-primary mr-1"
+                                   data-card-tool="toggle">
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end::Row-->
+
+
+            <!--end::Dashboard-->
+
+            <!--[html-partial:end:{"id":"demo1/dist/inc/view/partials/content/dashboards/demo1","page":"index"}]/-->
+
+            <!--[html-partial:end:{"id":"demo1/dist/inc/view/demos/pages/index","page":"index"}]/-->
+        </div>
+
+        <!--end::Container-->
+    </div>
+
+    <!--end::Entry-->
+
+{% endblock %}
